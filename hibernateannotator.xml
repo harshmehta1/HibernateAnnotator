@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="hibernateannotator" default="all">
+  
+  
+  <property file="hibernateannotator.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+    <include name="*.klib"/>
+    <include name="*.swc"/>
+    <include name="*.war"/>
+    <include name="*.zip"/>
+    <include name="*.ane"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.11" value="${jdk.home.11}/bin"/>
+  <path id="jdk.classpath.11">
+    <fileset dir="${jdk.home.11}">
+      <include name="../jdk-11.0.1!/java.base"/>
+      <include name="../jdk-11.0.1!/java.compiler"/>
+      <include name="../jdk-11.0.1!/java.datatransfer"/>
+      <include name="../jdk-11.0.1!/java.desktop"/>
+      <include name="../jdk-11.0.1!/java.instrument"/>
+      <include name="../jdk-11.0.1!/java.logging"/>
+      <include name="../jdk-11.0.1!/java.management"/>
+      <include name="../jdk-11.0.1!/java.management.rmi"/>
+      <include name="../jdk-11.0.1!/java.naming"/>
+      <include name="../jdk-11.0.1!/java.net.http"/>
+      <include name="../jdk-11.0.1!/java.prefs"/>
+      <include name="../jdk-11.0.1!/java.rmi"/>
+      <include name="../jdk-11.0.1!/java.scripting"/>
+      <include name="../jdk-11.0.1!/java.se"/>
+      <include name="../jdk-11.0.1!/java.security.jgss"/>
+      <include name="../jdk-11.0.1!/java.security.sasl"/>
+      <include name="../jdk-11.0.1!/java.smartcardio"/>
+      <include name="../jdk-11.0.1!/java.sql"/>
+      <include name="../jdk-11.0.1!/java.sql.rowset"/>
+      <include name="../jdk-11.0.1!/java.transaction.xa"/>
+      <include name="../jdk-11.0.1!/java.xml"/>
+      <include name="../jdk-11.0.1!/java.xml.crypto"/>
+      <include name="../jdk-11.0.1!/jdk.accessibility"/>
+      <include name="../jdk-11.0.1!/jdk.aot"/>
+      <include name="../jdk-11.0.1!/jdk.attach"/>
+      <include name="../jdk-11.0.1!/jdk.charsets"/>
+      <include name="../jdk-11.0.1!/jdk.compiler"/>
+      <include name="../jdk-11.0.1!/jdk.crypto.cryptoki"/>
+      <include name="../jdk-11.0.1!/jdk.crypto.ec"/>
+      <include name="../jdk-11.0.1!/jdk.crypto.mscapi"/>
+      <include name="../jdk-11.0.1!/jdk.dynalink"/>
+      <include name="../jdk-11.0.1!/jdk.editpad"/>
+      <include name="../jdk-11.0.1!/jdk.hotspot.agent"/>
+      <include name="../jdk-11.0.1!/jdk.httpserver"/>
+      <include name="../jdk-11.0.1!/jdk.internal.ed"/>
+      <include name="../jdk-11.0.1!/jdk.internal.jvmstat"/>
+      <include name="../jdk-11.0.1!/jdk.internal.le"/>
+      <include name="../jdk-11.0.1!/jdk.internal.opt"/>
+      <include name="../jdk-11.0.1!/jdk.internal.vm.ci"/>
+      <include name="../jdk-11.0.1!/jdk.internal.vm.compiler"/>
+      <include name="../jdk-11.0.1!/jdk.internal.vm.compiler.management"/>
+      <include name="../jdk-11.0.1!/jdk.jartool"/>
+      <include name="../jdk-11.0.1!/jdk.javadoc"/>
+      <include name="../jdk-11.0.1!/jdk.jcmd"/>
+      <include name="../jdk-11.0.1!/jdk.jconsole"/>
+      <include name="../jdk-11.0.1!/jdk.jdeps"/>
+      <include name="../jdk-11.0.1!/jdk.jdi"/>
+      <include name="../jdk-11.0.1!/jdk.jdwp.agent"/>
+      <include name="../jdk-11.0.1!/jdk.jfr"/>
+      <include name="../jdk-11.0.1!/jdk.jlink"/>
+      <include name="../jdk-11.0.1!/jdk.jshell"/>
+      <include name="../jdk-11.0.1!/jdk.jsobject"/>
+      <include name="../jdk-11.0.1!/jdk.jstatd"/>
+      <include name="../jdk-11.0.1!/jdk.localedata"/>
+      <include name="../jdk-11.0.1!/jdk.management"/>
+      <include name="../jdk-11.0.1!/jdk.management.agent"/>
+      <include name="../jdk-11.0.1!/jdk.management.jfr"/>
+      <include name="../jdk-11.0.1!/jdk.naming.dns"/>
+      <include name="../jdk-11.0.1!/jdk.naming.rmi"/>
+      <include name="../jdk-11.0.1!/jdk.net"/>
+      <include name="../jdk-11.0.1!/jdk.pack"/>
+      <include name="../jdk-11.0.1!/jdk.rmic"/>
+      <include name="../jdk-11.0.1!/jdk.scripting.nashorn"/>
+      <include name="../jdk-11.0.1!/jdk.scripting.nashorn.shell"/>
+      <include name="../jdk-11.0.1!/jdk.sctp"/>
+      <include name="../jdk-11.0.1!/jdk.security.auth"/>
+      <include name="../jdk-11.0.1!/jdk.security.jgss"/>
+      <include name="../jdk-11.0.1!/jdk.unsupported"/>
+      <include name="../jdk-11.0.1!/jdk.unsupported.desktop"/>
+      <include name="../jdk-11.0.1!/jdk.xml.dom"/>
+      <include name="../jdk-11.0.1!/jdk.zipfs"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.11}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.11}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.11"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.7.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.9.7/jackson-core-2.9.7.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.7.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.9.7/jackson-databind-2.9.7.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.7.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.9.7/jackson-dataformat-yaml-2.9.7.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.code.findbugs:annotations:1.3.9.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/code/findbugs/annotations/1.3.9/annotations-1.3.9.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.code.findbugs:jsr305:3.0.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/code/findbugs/jsr305/3.0.1/jsr305-3.0.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.code.gson:gson:2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/code/gson/gson/2.5/gson-2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.code.javaparser:javaparser:1.0.10.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/code/javaparser/javaparser/1.0.10/javaparser-1.0.10.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.sun.codemodel:codemodel:2.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/sun/codemodel/codemodel/2.6/codemodel-2.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-io:commons-io:2.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-io/commons-io/2.4/commons-io-2.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-lang:commons-lang:2.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.persistence:javax.persistence-api:2.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/persistence/javax.persistence-api/2.2/javax.persistence-api-2.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.validation:validation-api:1.0.0.ga.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar"/>
+  </path>
+  
+  <path id="library.maven:_joda-time:joda-time:2.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/joda-time/joda-time/2.2/joda-time-2.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_junit:junit:4.11.classpath">
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.11/junit-4.11.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.sourceforge.collections:collections-generic:4.01.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/sourceforge/collections/collections-generic/4.01/collections-generic-4.01.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.commons:commons-lang3:3.2.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/commons/commons-lang3/3.2.1/commons-lang3-3.2.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.codehaus.jackson:jackson-mapper-asl:1.9.13.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jsonschema2pojo:jsonschema2pojo-core:1.0.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jsonschema2pojo/jsonschema2pojo-core/1.0.1/jsonschema2pojo-core-1.0.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jsonschema2pojo:jsonschema2pojo-scalagen:1.0.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jsonschema2pojo/jsonschema2pojo-scalagen/1.0.1/jsonschema2pojo-scalagen-1.0.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.scala-lang:scala-library:2.11.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.yaml:snakeyaml:1.23.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/yaml/snakeyaml/1.23/snakeyaml-1.23.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <fileset dir="${javac2.home}">
+      <include name="javac2.jar"/>
+      <include name="jdom.jar"/>
+      <include name="asm-all*.jar"/>
+      <include name="forms-*.jar"/>
+    </fileset>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module HibernateAnnotator -->
+  
+  <dirname property="module.hibernateannotator.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.hibernateannotator" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.hibernateannotator" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.hibernateannotator" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.hibernateannotator" value="-encoding UTF-8 -source 7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="hibernateannotator.output.dir" value="${module.hibernateannotator.basedir}/target/classes"/>
+  <property name="hibernateannotator.testoutput.dir" value="${module.hibernateannotator.basedir}/target/test-classes"/>
+  
+  <path id="hibernateannotator.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="hibernateannotator.module.production.classpath">
+    <path refid="${module.jdk.classpath.hibernateannotator}"/>
+    <path refid="library.maven:_org.jsonschema2pojo:jsonschema2pojo-core:1.0.1.classpath"/>
+    <path refid="library.maven:_org.jsonschema2pojo:jsonschema2pojo-scalagen:1.0.1.classpath"/>
+    <path refid="library.maven:_net.sourceforge.collections:collections-generic:4.01.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.2.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.7.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.23.classpath"/>
+    <path refid="library.maven:_org.scala-lang:scala-library:2.11.6.classpath"/>
+    <path refid="library.maven:_com.google.code.javaparser:javaparser:1.0.10.classpath"/>
+    <path refid="library.maven:_com.sun.codemodel:codemodel:2.6.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.5.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.1.classpath"/>
+    <path refid="library.maven:_commons-lang:commons-lang:2.6.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.4.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.0.0.ga.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.2.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:annotations:1.3.9.classpath"/>
+    <path refid="library.maven:_javax.persistence:javax.persistence-api:2.2.classpath"/>
+  </path>
+  
+  <path id="hibernateannotator.runtime.production.module.classpath">
+    <pathelement location="${hibernateannotator.output.dir}"/>
+    <path refid="library.maven:_org.jsonschema2pojo:jsonschema2pojo-core:1.0.1.classpath"/>
+    <path refid="library.maven:_org.jsonschema2pojo:jsonschema2pojo-scalagen:1.0.1.classpath"/>
+    <path refid="library.maven:_net.sourceforge.collections:collections-generic:4.01.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.2.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.7.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.23.classpath"/>
+    <path refid="library.maven:_org.scala-lang:scala-library:2.11.6.classpath"/>
+    <path refid="library.maven:_com.google.code.javaparser:javaparser:1.0.10.classpath"/>
+    <path refid="library.maven:_com.sun.codemodel:codemodel:2.6.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.5.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.1.classpath"/>
+    <path refid="library.maven:_commons-lang:commons-lang:2.6.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.4.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.0.0.ga.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.2.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:annotations:1.3.9.classpath"/>
+    <path refid="library.maven:_javax.persistence:javax.persistence-api:2.2.classpath"/>
+  </path>
+  
+  <path id="hibernateannotator.module.classpath">
+    <path refid="${module.jdk.classpath.hibernateannotator}"/>
+    <pathelement location="${hibernateannotator.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_org.jsonschema2pojo:jsonschema2pojo-core:1.0.1.classpath"/>
+    <path refid="library.maven:_org.jsonschema2pojo:jsonschema2pojo-scalagen:1.0.1.classpath"/>
+    <path refid="library.maven:_net.sourceforge.collections:collections-generic:4.01.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.2.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.7.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.23.classpath"/>
+    <path refid="library.maven:_org.scala-lang:scala-library:2.11.6.classpath"/>
+    <path refid="library.maven:_com.google.code.javaparser:javaparser:1.0.10.classpath"/>
+    <path refid="library.maven:_com.sun.codemodel:codemodel:2.6.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.5.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.1.classpath"/>
+    <path refid="library.maven:_commons-lang:commons-lang:2.6.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.4.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.0.0.ga.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.2.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:annotations:1.3.9.classpath"/>
+    <path refid="library.maven:_javax.persistence:javax.persistence-api:2.2.classpath"/>
+  </path>
+  
+  <path id="hibernateannotator.runtime.module.classpath">
+    <pathelement location="${hibernateannotator.testoutput.dir}"/>
+    <pathelement location="${hibernateannotator.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_org.jsonschema2pojo:jsonschema2pojo-core:1.0.1.classpath"/>
+    <path refid="library.maven:_org.jsonschema2pojo:jsonschema2pojo-scalagen:1.0.1.classpath"/>
+    <path refid="library.maven:_net.sourceforge.collections:collections-generic:4.01.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.2.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.7.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.23.classpath"/>
+    <path refid="library.maven:_org.scala-lang:scala-library:2.11.6.classpath"/>
+    <path refid="library.maven:_com.google.code.javaparser:javaparser:1.0.10.classpath"/>
+    <path refid="library.maven:_com.sun.codemodel:codemodel:2.6.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.5.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.1.classpath"/>
+    <path refid="library.maven:_commons-lang:commons-lang:2.6.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.4.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.0.0.ga.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.2.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:annotations:1.3.9.classpath"/>
+    <path refid="library.maven:_javax.persistence:javax.persistence-api:2.2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.hibernateannotator">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.hibernateannotator">
+    <patternset refid="excluded.from.module.hibernateannotator"/>
+  </patternset>
+  
+  <path id="hibernateannotator.module.sourcepath">
+    <dirset dir="${module.hibernateannotator.basedir}">
+      <include name="src/main/java"/>
+    </dirset>
+  </path>
+  
+  <path id="hibernateannotator.module.test.sourcepath">
+    <dirset dir="${module.hibernateannotator.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.hibernateannotator" depends="compile.module.hibernateannotator.production,compile.module.hibernateannotator.tests" description="Compile module HibernateAnnotator"/>
+  
+  <target name="compile.module.hibernateannotator.production" depends="register.custom.compilers" description="Compile module HibernateAnnotator; production classes">
+    <mkdir dir="${hibernateannotator.output.dir}"/>
+    <javac2 destdir="${hibernateannotator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.hibernateannotator}/javac">
+      <compilerarg line="${compiler.args.hibernateannotator}"/>
+      <bootclasspath refid="hibernateannotator.module.bootclasspath"/>
+      <classpath refid="hibernateannotator.module.production.classpath"/>
+      <src refid="hibernateannotator.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.hibernateannotator"/>
+    </javac2>
+    
+    <copy todir="${hibernateannotator.output.dir}">
+      <fileset dir="${module.hibernateannotator.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.hibernateannotator.tests" depends="register.custom.compilers,compile.module.hibernateannotator.production" description="compile module HibernateAnnotator; test classes" unless="skip.tests">
+    <mkdir dir="${hibernateannotator.testoutput.dir}"/>
+    <javac2 destdir="${hibernateannotator.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.hibernateannotator}/javac">
+      <compilerarg line="${compiler.args.hibernateannotator}"/>
+      <bootclasspath refid="hibernateannotator.module.bootclasspath"/>
+      <classpath refid="hibernateannotator.module.classpath"/>
+      <src refid="hibernateannotator.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.hibernateannotator"/>
+    </javac2>
+    
+    <copy todir="${hibernateannotator.testoutput.dir}">
+      <fileset dir="${module.hibernateannotator.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.hibernateannotator" description="cleanup module">
+    <delete dir="${hibernateannotator.output.dir}"/>
+    <delete dir="${hibernateannotator.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.hibernateannotator" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.hibernateannotator" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>
