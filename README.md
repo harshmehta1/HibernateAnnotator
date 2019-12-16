@@ -12,3 +12,11 @@ Specifically developed for https://github.com/harshmehta1/auto-java-app-generato
 For example:
 
 `SchemaMapper mapper = new SchemaMapper(new RuleFactory(config, **new HibernateAnnotator()**, new SchemaStore()), new SchemaGenerator());`
+
+## Generating a jar
+
+To generate a jar of the project:
+
+* Open command prompt and go into the project folder
+* Run `javac *.java`
+* Run `jar cvfe HibernateAnnotator.jar HibernateAnnotator *.class`
